@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Planeje aportes mensais decrescentes e acompanhe a projeção anual pela regra fixa de redução de 13%."
+    >
+    <meta name="theme-color" content="#101813">
+    <title>Visão de José do Egito | Simulador de aportes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Visão de José do Egito, início">
+          <span class="brand-mark" aria-hidden="true">VJ</span>
+          <span>VISÃO <span class="brand-accent">DE JOSÉ</span></span>
+        </a>
+        <span class="topbar-note">
+          <span class="status-dot" aria-hidden="true"></span>
+          PLANEJAMENTO PESSOAL
+        </span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow"><span aria-hidden="true">✳</span> SABEDORIA PARA PLANEJAR</p>
+          <h1 id="page-title">Visão de José do Egito</h1>
+          <p class="intro-copy">
+            Uma visão clara para organizar seus aportes, ano após ano.
+          </p>
+          <div class="rule-badge">
+            <span class="rule-icon" aria-hidden="true">↓</span>
+            <span>Regra fixa de redução anual <strong>13%</strong></span>
+          </div>
+        </section>
+
+        <section class="planner panel" aria-labelledby="planner-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">SEU PLANEJAMENTO</p>
+              <h2 id="planner-title">Defina seu ponto de partida</h2>
+            </div>
+            <span class="step-label">01 <span>/ 02</span></span>
+          </div>
+
+          <form id="planner-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="monthly-contribution">Aporte mensal inicial</label>
+                <div class="input-wrap">
+                  <span class="input-prefix" aria-hidden="true">R$</span>
+                  <input
+                    id="monthly-contribution"
+                    name="monthlyContribution"
+                    type="number"
+                    inputmode="decimal"
+                    min="0.01"
+                    max="99999999999.99"
+                    step="0.01"
+                    value="10000.00"
+                    required
+                    aria-describedby="contribution-hint"
+                  >
+                </div>
+                <span class="field-hint" id="contribution-hint">Valor mensal em reais</span>
+              </div>
+
+              <div class="field">
+                <label for="planning-years">Tempo de planejamento</label>
+                <div class="input-wrap years-wrap">
+                  <input
+                    id="planning-years"
+                    name="planningYears"
+                    type="number"
+                    inputmode="numeric"
+                    min="1"
+                    max="50"
+                    step="1"
+                    value="6"
+                    required
+                    aria-describedby="years-hint"
+                  >
+                  <span class="input-suffix" aria-hidden="true">anos</span>
+                </div>
+                <span class="field-hint" id="years-hint">Escolha de 1 a 50 anos</span>
+              </div>
+            </div>
+
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+
+            <div class="form-footer">
+              <p class="fixed-rule">
+                <span class="fixed-rule-icon" aria-hidden="true">↘</span>
+                <span>Seu aporte diminui <strong>13% a cada ano</strong></span>
+              </p>
+              <div class="form-actions">
+                <button class="button button-quiet" id="reset-button" type="button">
+                  Restaurar padrão
+                </button>
+                <button class="button button-primary" type="submit">
+                  Calcular planejamento <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="results" aria-labelledby="results-title" aria-live="polite">
+          <div class="section-heading results-heading">
+            <div>
+              <p class="eyebrow">SUA PROJEÇÃO</p>
+              <h2 id="results-title">Um plano, ano a ano</h2>
+            </div>
+            <span class="step-label">02 <span>/ 02</span></span>
+          </div>
+
+          <div class="metrics-grid" id="metrics">
+            <article class="metric-card metric-featured">
+              <p class="metric-label">TOTAL APORTADO</p>
+              <p class="metric-value" id="total-contributed">—</p>
+              <p class="metric-caption">ao longo de todo o período</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">APORTE INICIAL</p>
+              <p class="metric-value" id="initial-contribution">—</p>
+              <p class="metric-caption">por mês · ano 1</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">APORTE NO ÚLTIMO ANO</p>
+              <p class="metric-value" id="final-contribution">—</p>
+              <p class="metric-caption" id="final-contribution-caption">por mês</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">REDUÇÃO MENSAL</p>
+              <p class="metric-value metric-green" id="monthly-reduction">—</p>
+              <p class="metric-caption">do primeiro ao último ano</p>
+            </article>
+            <article class="metric-card metric-savings">
+              <p class="metric-label">ECONOMIA NOS APORTES</p>
+              <p class="metric-value metric-green" id="contribution-savings">—</p>
+              <p class="metric-caption">vs. manter o aporte inicial constante</p>
+            </article>
+          </div>
+
+          <section class="panel chart-panel" aria-labelledby="chart-title">
+            <div class="section-heading chart-heading">
+              <div>
+                <p class="eyebrow">EVOLUÇÃO DO APORTE</p>
+                <h3 id="chart-title">Aporte mensal por ano</h3>
+              </div>
+              <span class="chart-key"><span aria-hidden="true"></span> Mensal</span>
+            </div>
+            <figure class="chart-figure" id="contribution-chart" aria-label="Gráfico do aporte mensal por ano">
+              <div class="chart-y-labels" aria-hidden="true">
+                <span id="chart-top-label">—</span>
+                <span id="chart-middle-label">—</span>
+                <span>R$ 0</span>
+              </div>
+              <div class="chart-content">
+                <div class="chart-plot" id="chart-plot" aria-hidden="true"></div>
+                <div class="chart-baseline" aria-hidden="true"></div>
+              </div>
+            </figure>
+          </section>
+
+          <section class="panel table-panel" aria-labelledby="table-title">
+            <div class="section-heading table-heading">
+              <div>
+                <p class="eyebrow">DETALHAMENTO</p>
+                <h3 id="table-title">Projeção anual</h3>
+              </div>
+              <span class="table-unit">Valores em BRL</span>
+            </div>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela de aportes por ano; role horizontalmente para ver todas as colunas">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Aporte mensal</th>
+                    <th scope="col">Total no ano</th>
+                    <th scope="col">Redução mensal</th>
+                    <th scope="col">Redução acumulada</th>
+                    <th scope="col">Total acumulado</th>
+                  </tr>
+                </thead>
+                <tbody id="projection-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <aside class="disclaimer">
+          <span class="disclaimer-icon" aria-hidden="true">i</span>
+          <p>
+            Esta ferramenta apresenta uma projeção matemática de aportes. Não representa
+            previsão de rentabilidade, recomendação financeira ou garantia de resultados.
+            A economia indicada compara apenas os valores planejados de aporte.
+          </p>
+        </aside>
+      </main>
+
+      <footer class="page-footer">
+        <span>VISÃO DE JOSÉ DO EGITO</span>
+        <span>PLANEJE COM PROPÓSITO.</span>
+      </footer>
+    </div>
+  </body>
+</html>
