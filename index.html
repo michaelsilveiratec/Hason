@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Planeje aportes mensais decrescentes e acompanhe a projeção anual pela regra fixa de redução de 13%."
+      content="Simule o crescimento estimado do património e acompanhe como os rendimentos podem reduzir o aporte mensal do próprio bolso."
     >
     <meta name="theme-color" content="#101813">
-    <title>Visão de José do Egito | Simulador de aportes</title>
+    <title>A Visão de José do Egito | Simulador financeiro</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
   </head>
   <body>
     <div class="page-shell">
       <header class="topbar">
-        <a class="brand" href="#" aria-label="Visão de José do Egito, início">
+        <a class="brand" href="#" aria-label="A Visão de José do Egito, início">
           <span class="brand-mark" aria-hidden="true">VJ</span>
           <span>VISÃO <span class="brand-accent">DE JOSÉ</span></span>
         </a>
@@ -28,21 +28,17 @@
       <main>
         <section class="intro" aria-labelledby="page-title">
           <p class="eyebrow"><span aria-hidden="true">✳</span> SABEDORIA PARA PLANEJAR</p>
-          <h1 id="page-title">Visão de José do Egito</h1>
+          <h1 id="page-title">A Visão de José do Egito</h1>
           <p class="intro-copy">
-            Uma visão clara para organizar seus aportes, ano após ano.
+            Uma estratégia para reduzir o esforço financeiro próprio à medida que o património cresce.
           </p>
-          <div class="rule-badge">
-            <span class="rule-icon" aria-hidden="true">↓</span>
-            <span>Regra fixa de redução anual <strong>13%</strong></span>
-          </div>
         </section>
 
         <section class="planner panel" aria-labelledby="planner-title">
           <div class="section-heading">
             <div>
               <p class="eyebrow">SEU PLANEJAMENTO</p>
-              <h2 id="planner-title">Defina seu ponto de partida</h2>
+              <h2 id="planner-title">Defina suas premissas</h2>
             </div>
             <span class="step-label">01 <span>/ 02</span></span>
           </div>
@@ -50,12 +46,12 @@
           <form id="planner-form" novalidate>
             <div class="form-grid">
               <div class="field">
-                <label for="monthly-contribution">Aporte mensal inicial</label>
+                <label for="monthly-goal">Meta mensal de crescimento planeado</label>
                 <div class="input-wrap">
                   <span class="input-prefix" aria-hidden="true">R$</span>
                   <input
-                    id="monthly-contribution"
-                    name="monthlyContribution"
+                    id="monthly-goal"
+                    name="monthlyGoal"
                     type="number"
                     inputmode="decimal"
                     min="0.01"
@@ -63,10 +59,10 @@
                     step="0.01"
                     value="10000.00"
                     required
-                    aria-describedby="contribution-hint"
+                    aria-describedby="goal-hint"
                   >
                 </div>
-                <span class="field-hint" id="contribution-hint">Valor mensal em reais</span>
+                <span class="field-hint" id="goal-hint">Referência de crescimento mensal em reais</span>
               </div>
 
               <div class="field">
@@ -80,7 +76,7 @@
                     min="1"
                     max="50"
                     step="1"
-                    value="6"
+                    value="10"
                     required
                     aria-describedby="years-hint"
                   >
@@ -88,14 +84,34 @@
                 </div>
                 <span class="field-hint" id="years-hint">Escolha de 1 a 50 anos</span>
               </div>
+
+              <div class="field">
+                <label for="monthly-rate">Rentabilidade mensal estimada</label>
+                <div class="input-wrap years-wrap">
+                  <input
+                    id="monthly-rate"
+                    name="monthlyRate"
+                    type="number"
+                    inputmode="decimal"
+                    min="0"
+                    max="100"
+                    step="0.0001"
+                    value="1"
+                    required
+                    aria-describedby="rate-hint"
+                  >
+                  <span class="input-suffix" aria-hidden="true">% ao mês</span>
+                </div>
+                <span class="field-hint" id="rate-hint">Estimativa editável de 0% a 100% ao mês</span>
+              </div>
             </div>
 
             <p id="form-error" class="form-error" role="alert" hidden></p>
 
             <div class="form-footer">
               <p class="fixed-rule">
-                <span class="fixed-rule-icon" aria-hidden="true">↘</span>
-                <span>Seu aporte diminui <strong>13% a cada ano</strong></span>
+                <span class="fixed-rule-icon" aria-hidden="true">↗</span>
+                <span>O aporte próprio é recalculado <strong>no início de cada ano</strong></span>
               </p>
               <div class="form-actions">
                 <button class="button button-quiet" id="reset-button" type="button">
@@ -120,48 +136,79 @@
 
           <div class="metrics-grid" id="metrics">
             <article class="metric-card metric-featured">
-              <p class="metric-label">TOTAL APORTADO</p>
-              <p class="metric-value" id="total-contributed">—</p>
+              <p class="metric-label">PATRIMÓNIO FINAL</p>
+              <p class="metric-value" id="final-wealth">—</p>
+              <p class="metric-caption">ao final de todo o período</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">TOTAL DO PRÓPRIO BOLSO</p>
+              <p class="metric-value" id="total-own-contributions">—</p>
               <p class="metric-caption">ao longo de todo o período</p>
             </article>
             <article class="metric-card">
-              <p class="metric-label">APORTE INICIAL</p>
-              <p class="metric-value" id="initial-contribution">—</p>
-              <p class="metric-caption">por mês · ano 1</p>
+              <p class="metric-label">RENDIMENTOS ESTIMADOS</p>
+              <p class="metric-value metric-green" id="total-earnings">—</p>
+              <p class="metric-caption">acumulados na simulação</p>
             </article>
             <article class="metric-card">
-              <p class="metric-label">APORTE NO ÚLTIMO ANO</p>
-              <p class="metric-value" id="final-contribution">—</p>
-              <p class="metric-caption" id="final-contribution-caption">por mês</p>
+              <p class="metric-label">APORTE PRÓPRIO · ANO 1</p>
+              <p class="metric-value" id="first-year-contribution">—</p>
+              <p class="metric-caption">por mês</p>
             </article>
             <article class="metric-card">
-              <p class="metric-label">REDUÇÃO MENSAL</p>
-              <p class="metric-value metric-green" id="monthly-reduction">—</p>
+              <p class="metric-label">APORTE PRÓPRIO · ÚLTIMO ANO</p>
+              <p class="metric-value" id="last-year-contribution">—</p>
+              <p class="metric-caption" id="last-year-caption">por mês</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">REDUÇÃO DO ESFORÇO MENSAL</p>
+              <p class="metric-value metric-green" id="effort-reduction">—</p>
               <p class="metric-caption">do primeiro ao último ano</p>
             </article>
             <article class="metric-card metric-savings">
-              <p class="metric-label">ECONOMIA NOS APORTES</p>
-              <p class="metric-value metric-green" id="contribution-savings">—</p>
-              <p class="metric-caption">vs. manter o aporte inicial constante</p>
+              <p class="metric-label">APORTE PRÓPRIO ZERADO</p>
+              <p class="metric-value metric-green" id="zero-contribution-year">—</p>
+              <p class="metric-caption" id="zero-contribution-caption">quando os rendimentos estimados alcançam a meta</p>
             </article>
           </div>
 
-          <section class="panel chart-panel" aria-labelledby="chart-title">
+          <section class="panel chart-panel" aria-labelledby="wealth-chart-title">
             <div class="section-heading chart-heading">
               <div>
-                <p class="eyebrow">EVOLUÇÃO DO APORTE</p>
-                <h3 id="chart-title">Aporte mensal por ano</h3>
+                <p class="eyebrow">EVOLUÇÃO DO PATRIMÓNIO</p>
+                <h3 id="wealth-chart-title">Património acumulado ao final de cada ano</h3>
               </div>
-              <span class="chart-key"><span aria-hidden="true"></span> Mensal</span>
+              <span class="chart-key"><span aria-hidden="true"></span> Final do ano</span>
             </div>
-            <figure class="chart-figure" id="contribution-chart" aria-label="Gráfico do aporte mensal por ano">
+            <figure class="chart-figure" id="wealth-chart" aria-label="Gráfico do património acumulado ao final de cada ano">
               <div class="chart-y-labels" aria-hidden="true">
-                <span id="chart-top-label">—</span>
-                <span id="chart-middle-label">—</span>
+                <span id="wealth-chart-top-label">—</span>
+                <span id="wealth-chart-middle-label">—</span>
                 <span>R$ 0</span>
               </div>
               <div class="chart-content">
-                <div class="chart-plot" id="chart-plot" aria-hidden="true"></div>
+                <div class="chart-plot" id="wealth-chart-plot" aria-hidden="true"></div>
+                <div class="chart-baseline" aria-hidden="true"></div>
+              </div>
+            </figure>
+          </section>
+
+          <section class="panel chart-panel" aria-labelledby="contribution-chart-title">
+            <div class="section-heading chart-heading">
+              <div>
+                <p class="eyebrow">ESFORÇO FINANCEIRO PRÓPRIO</p>
+                <h3 id="contribution-chart-title">Aporte mensal do próprio bolso por ano</h3>
+              </div>
+              <span class="chart-key"><span aria-hidden="true"></span> Mensal</span>
+            </div>
+            <figure class="chart-figure" id="contribution-chart" aria-label="Gráfico do aporte mensal do próprio bolso por ano">
+              <div class="chart-y-labels" aria-hidden="true">
+                <span id="contribution-chart-top-label">—</span>
+                <span id="contribution-chart-middle-label">—</span>
+                <span>R$ 0</span>
+              </div>
+              <div class="chart-content">
+                <div class="chart-plot" id="contribution-chart-plot" aria-hidden="true"></div>
                 <div class="chart-baseline" aria-hidden="true"></div>
               </div>
             </figure>
@@ -171,20 +218,21 @@
             <div class="section-heading table-heading">
               <div>
                 <p class="eyebrow">DETALHAMENTO</p>
-                <h3 id="table-title">Projeção anual</h3>
+                <h3 id="table-title">Projeção anual do património e dos aportes</h3>
               </div>
               <span class="table-unit">Valores em BRL</span>
             </div>
-            <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela de aportes por ano; role horizontalmente para ver todas as colunas">
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela de projeção anual; role horizontalmente para ver todas as colunas">
               <table>
                 <thead>
                   <tr>
                     <th scope="col">Ano</th>
-                    <th scope="col">Aporte mensal</th>
-                    <th scope="col">Total no ano</th>
-                    <th scope="col">Redução mensal</th>
-                    <th scope="col">Redução acumulada</th>
-                    <th scope="col">Total acumulado</th>
+                    <th scope="col">Património inicial</th>
+                    <th scope="col">Rendimento mensal de referência</th>
+                    <th scope="col">Aporte próprio mensal</th>
+                    <th scope="col">Total do próprio bolso no ano</th>
+                    <th scope="col">Rendimentos no ano</th>
+                    <th scope="col">Património final</th>
                   </tr>
                 </thead>
                 <tbody id="projection-rows"></tbody>
@@ -196,15 +244,15 @@
         <aside class="disclaimer">
           <span class="disclaimer-icon" aria-hidden="true">i</span>
           <p>
-            Esta ferramenta apresenta uma projeção matemática de aportes. Não representa
-            previsão de rentabilidade, recomendação financeira ou garantia de resultados.
-            A economia indicada compara apenas os valores planejados de aporte.
+            Esta ferramenta apresenta uma simulação matemática com base na rentabilidade
+            mensal estimada que informou. Os rendimentos não são garantidos e podem ser
+            diferentes dos resultados reais; isto não constitui recomendação financeira.
           </p>
         </aside>
       </main>
 
       <footer class="page-footer">
-        <span>VISÃO DE JOSÉ DO EGITO</span>
+        <span>A VISÃO DE JOSÉ DO EGITO</span>
         <span>PLANEJE COM PROPÓSITO.</span>
       </footer>
     </div>

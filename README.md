@@ -1,8 +1,9 @@
-# Hason — Visão de José do Egito
+# Hason — A Visão de José do Egito
 
-Simulador educativo de aportes mensais decrescentes. Informe um valor inicial e
-um período de 1 a 50 anos para visualizar a redução anual fixa de 13%, os totais
-aportados, uma tabela anual e um gráfico.
+Simulador educativo de crescimento patrimonial. Defina uma meta mensal de
+crescimento, um prazo de 1 a 50 anos e uma rentabilidade mensal estimada. A
+simulação calcula o aporte mensal do próprio bolso no início de cada ano com
+base nos rendimentos estimados sobre o património acumulado.
 
 ## Executar localmente
 
@@ -11,11 +12,16 @@ configurar um servidor ou criar uma conta.
 
 ## Premissas
 
-- O aporte mensal é reduzido em 13% a cada ano e arredondado para centavos.
-- A simulação não aplica juros, rentabilidade, inflação, impostos ou correção monetária.
-- A economia exibida compara os aportes planejados com a manutenção do aporte
-  inicial constante; não representa lucro ou dinheiro disponível.
-- Os valores informados não são salvos.
+- O património inicial é R$ 0,00.
+- O aporte próprio mensal é calculado uma vez no início de cada ano:
+  `máximo de zero ou (meta mensal − rendimento mensal de referência)`.
+- A rentabilidade mensal é aplicada sobre o património do mês anterior; o aporte
+  próprio definido para o ano é feito ao final de cada mês.
+- Rendimentos e património são arredondados para centavos a cada mês.
+- A rentabilidade informada é uma estimativa, não é garantida e não inclui
+  impostos, inflação ou taxas.
+- Os valores informados não são guardados nem enviados para um servidor.
 
-Esta ferramenta apresenta uma projeção matemática de aportes. Não representa
-previsão de rentabilidade, recomendação financeira ou garantia de resultados.
+Esta ferramenta apresenta uma simulação matemática com base nas premissas
+informadas. Não representa previsão de rentabilidade, recomendação financeira
+ou garantia de resultados.

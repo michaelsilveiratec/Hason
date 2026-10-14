@@ -212,7 +212,7 @@ h1 {
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1.2fr;
   gap: 20px;
   max-width: 700px;
   margin-top: 24px;
@@ -537,6 +537,12 @@ h1 {
   box-shadow: 0 0 16px rgb(181 230 108 / 8%);
 }
 
+.chart-bar-contribution {
+  border-color: rgb(213 182 106 / 55%);
+  background: linear-gradient(180deg, #d5b66a, #806334);
+  box-shadow: 0 0 16px rgb(213 182 106 / 8%);
+}
+
 .chart-year {
   margin-top: 8px;
   color: #8d988b;
@@ -670,6 +676,14 @@ td:last-child {
     width: 100%;
   }
 
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-grid .field:first-child {
+    grid-column: span 2;
+  }
+
   .form-actions .button-primary {
     flex: 1;
   }
@@ -717,6 +731,10 @@ td:last-child {
     grid-template-columns: 1fr;
     gap: 15px;
     margin-top: 20px;
+  }
+
+  .form-grid .field:first-child {
+    grid-column: auto;
   }
 
   .form-actions {
