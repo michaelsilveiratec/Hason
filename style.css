@@ -380,9 +380,10 @@ a:focus-visible,
   flex: 0 0 68px;
   display: grid;
   place-items: center;
+  overflow: hidden;
   border: 1px solid rgb(215 189 138 / 75%);
   border-radius: 50%;
-  background: rgb(215 189 138 / 5%);
+  background: #0c1a2d;
 }
 
 .phone-seal img {
@@ -390,6 +391,7 @@ a:focus-visible,
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  transform: scale(1.08);
 }
 
 .phone-wordmark {
