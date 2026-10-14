@@ -385,14 +385,11 @@ a:focus-visible,
   background: rgb(215 189 138 / 5%);
 }
 
-.phone-seal svg {
-  width: 60px;
-  height: 60px;
-  fill: rgb(215 189 138 / 14%);
-  stroke: var(--gold);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.1;
+.phone-seal img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .phone-wordmark {
@@ -1203,11 +1200,6 @@ td:last-child {
     flex-basis: 44px;
   }
 
-  .phone-seal svg {
-    width: 39px;
-    height: 39px;
-  }
-
   .phone-wordmark {
     font-size: clamp(12px, 3vw, 17px);
   }
@@ -1418,11 +1410,6 @@ td:last-child {
     width: 30px;
     height: 30px;
     flex-basis: 30px;
-  }
-
-  .phone-seal svg {
-    width: 27px;
-    height: 27px;
   }
 
   .money-emblem {
