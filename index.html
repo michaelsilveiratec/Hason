@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Simule o crescimento estimado do património e acompanhe como os rendimentos podem reduzir o aporte mensal do próprio bolso."
+      content="Simule o crescimento estimado do patrimônio e acompanhe como os rendimentos podem reduzir o aporte mensal do próprio bolso."
     >
     <meta name="theme-color" content="#101813">
     <title>A Visão de José do Egito | Simulador financeiro</title>
@@ -45,8 +45,8 @@
               Sua ferramenta de planejamento financeiro baseada na <span>Visão de José.</span>
             </h1>
             <p class="hero-description">
-              O sistema calcula quanto você precisa investir a cada ano para atingir suas metas,
-              mantendo o controle total da sua jornada financeira. Sem complicadores, direto ao ponto.
+              O sistema calcula o aporte mensal necessário, recalculado no início de cada ano,
+              para atingir suas metas e acompanhar sua jornada financeira. Sem complicadores, direto ao ponto.
             </p>
             <a class="hero-cta" href="#planner">COMEÇAR O PLANEJAMENTO</a>
           </div>
@@ -87,7 +87,7 @@
                         <path d="M5 41h43M10 35V25h8v10m4 0V17h8v18m4 0V9h8v26"></path>
                         <path d="m7 20 12-8 9 4L43 3m-8 0h8v8"></path>
                       </svg>
-                      <span>Definir Meta de Patrimônio</span>
+                      <span>Definir meta mensal</span>
                     </article>
                     <article class="phone-feature">
                       <svg viewBox="0 0 52 48" aria-hidden="true">
@@ -95,7 +95,7 @@
                         <path d="M6 10v6c0 5 16 5 16 0v-6m-16 6v6c0 5 16 5 16 0v-6m-16 6v6c0 5 16 5 16 0v-6"></path>
                         <path d="m33 8 12 4v22H28V12zM28 16h17m-13 4h3m5 0h3m-11 5h3m5 0h3m-11 5h3m5 0h3"></path>
                       </svg>
-                      <span>Calcular Aporte Anual</span>
+                      <span>Calcular aporte mensal</span>
                     </article>
                     <article class="phone-feature">
                       <svg viewBox="0 0 52 48" aria-hidden="true">
@@ -103,7 +103,7 @@
                         <rect x="9" y="18" width="27" height="12" rx="4"></rect>
                         <circle cx="40" cy="24" r="2"></circle>
                       </svg>
-                      <span>Acompanhar Evolução</span>
+                      <span>Acompanhar evolução do patrimônio</span>
                     </article>
                   </div>
                 </div>
@@ -125,7 +125,7 @@
           <form id="planner-form" novalidate>
             <div class="form-grid">
               <div class="field">
-                <label for="monthly-goal">Meta mensal de crescimento planeado</label>
+                <label for="monthly-goal">Meta mensal de crescimento planejada</label>
                 <div class="input-wrap">
                   <span class="input-prefix" aria-hidden="true">R$</span>
                   <input
@@ -194,7 +194,7 @@
               </p>
               <div class="form-actions">
                 <button class="button button-quiet" id="reset-button" type="button">
-                  Restaurar padrão
+                  Zerar campos
                 </button>
                 <button class="button button-primary" type="submit">
                   Calcular planejamento <span aria-hidden="true">→</span>
@@ -215,7 +215,7 @@
 
           <div class="metrics-grid" id="metrics">
             <article class="metric-card metric-featured">
-              <p class="metric-label">PATRIMÓNIO FINAL</p>
+              <p class="metric-label">PATRIMÔNIO FINAL</p>
               <p class="metric-value" id="final-wealth">—</p>
               <p class="metric-caption">ao final de todo o período</p>
             </article>
@@ -254,8 +254,8 @@
           <section class="panel chart-panel" aria-labelledby="wealth-chart-title">
             <div class="section-heading chart-heading">
               <div>
-                <p class="eyebrow">EVOLUÇÃO DO PATRIMÓNIO</p>
-                <h3 id="wealth-chart-title">Património acumulado ao final de cada ano</h3>
+                <p class="eyebrow">EVOLUÇÃO DO PATRIMÔNIO</p>
+                <h3 id="wealth-chart-title">Patrimônio acumulado ao final de cada ano</h3>
               </div>
               <span class="chart-key"><span aria-hidden="true"></span> Final do ano</span>
             </div>
@@ -297,21 +297,21 @@
             <div class="section-heading table-heading">
               <div>
                 <p class="eyebrow">DETALHAMENTO</p>
-                <h3 id="table-title">Projeção anual do património e dos aportes</h3>
+                <h3 id="table-title">Projeção anual do patrimônio e dos aportes</h3>
               </div>
               <span class="table-unit">Valores em BRL</span>
             </div>
-            <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela de projeção anual; role horizontalmente para ver todas as colunas">
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela de projeção anual; deslize horizontalmente para ver todas as colunas">
               <table>
                 <thead>
                   <tr>
                     <th scope="col">Ano</th>
-                    <th scope="col">Património inicial</th>
+                    <th scope="col">Patrimônio inicial</th>
                     <th scope="col">Rendimento mensal de referência</th>
                     <th scope="col">Aporte próprio mensal</th>
                     <th scope="col">Total do próprio bolso no ano</th>
                     <th scope="col">Rendimentos no ano</th>
-                    <th scope="col">Património final</th>
+                    <th scope="col">Patrimônio final</th>
                   </tr>
                 </thead>
                 <tbody id="projection-rows"></tbody>

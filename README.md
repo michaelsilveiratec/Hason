@@ -3,7 +3,7 @@
 Simulador educativo de crescimento patrimonial. Defina uma meta mensal de
 crescimento, um prazo de 1 a 50 anos e uma rentabilidade mensal estimada. A
 simulação calcula o aporte mensal do próprio bolso no início de cada ano com
-base nos rendimentos estimados sobre o património acumulado.
+base nos rendimentos estimados sobre o patrimônio acumulado.
 
 ## Executar localmente
 
@@ -12,12 +12,13 @@ configurar um servidor ou criar uma conta.
 
 ## Premissas
 
-- O património inicial é R$ 0,00.
+- O patrimônio inicial é R$ 0,00.
 - O aporte próprio mensal é calculado uma vez no início de cada ano:
-  `máximo de zero ou (meta mensal − rendimento mensal de referência)`.
-- A rentabilidade mensal é aplicada sobre o património do mês anterior; o aporte
-  próprio definido para o ano é feito ao final de cada mês.
-- Rendimentos e património são arredondados para centavos a cada mês.
+  `máximo de zero ou (meta mensal − rendimento mensal sobre o patrimônio inicial do ano)`.
+- Esse aporte permanece igual durante os 12 meses do ano. A rentabilidade mensal
+  é calculada sobre o patrimônio atualizado no mês anterior; ao final de cada
+  mês, somam-se ao patrimônio o rendimento e o aporte definido para o ano.
+- Rendimentos e patrimônio são arredondados para centavos a cada mês.
 - A rentabilidade informada é uma estimativa, não é garantida e não inclui
   impostos, inflação ou taxas.
 - Os valores informados não são guardados nem enviados para um servidor.
